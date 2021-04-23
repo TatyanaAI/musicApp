@@ -12,7 +12,10 @@ const TrackSchema = new Schema({
     ref: 'Album',
     required: true
   },
-  duration: String,
+  duration: {
+    type: String,
+    required: true
+  }
 });
 
 TrackSchema.plugin(idValidator, {

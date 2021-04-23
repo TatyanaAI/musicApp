@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Track = require("../models/Track");
-const Artist = require("../models/Artist");
 const Album = require("../models/Album");
 const mongoose = require('mongoose');
 
