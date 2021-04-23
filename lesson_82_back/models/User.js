@@ -42,7 +42,9 @@ UserSchema.pre("save", async function(next) {
     }
   });
   
-
+  UserSchema.methods.checkPassword = function(password) {
+    return bcrypt.compare(password, this.password);
+  };
   
   UserSchema.methods.generateToken = function() {
     this.token = nanoid();
