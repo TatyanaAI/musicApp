@@ -33,7 +33,7 @@ const createRouter = () => {
         const albums = (await Album.find({ "artist": mongoose.Types.ObjectId(req.query.artist) })).map(album => album.id)
         filter = { "album": { $in: albums } }
       }
-      let tracks = await Track.find(filter).populate("album");
+      let tracks = await Track.find(filter).sort({"number" : 1}).populate("album");
       res.send(tracks);
     } catch (e) {
       console.error(e.message)

@@ -23,7 +23,7 @@ const createRouter = () => {
     if (result) {
       return res.send(result);
     }
-    
+
     const artist = { ...req.body };
 
     if (req.file) {
@@ -44,7 +44,16 @@ const createRouter = () => {
     try {
       const artists = await Artist.find();
       res.send(artists);
-     
+
+    } catch (e) {
+      res.sendStatus(500).send(e);;
+    }
+  });
+
+  router.get("/:id", async (req, res) => {
+    try {
+      const artist = await Artist.findById(req.params.id);
+      res.send(artist);
     } catch (e) {
       res.sendStatus(500).send(e);;
     }

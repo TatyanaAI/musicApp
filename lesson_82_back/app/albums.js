@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const config = require('../config');
 const Album = require("../models/Album");
+const Track = require("../models/Track");
 const mongoose = require('mongoose');
 
 
@@ -46,7 +47,7 @@ const createRouter = () => {
       if (req.query.artist) {
         filter = { "artist": mongoose.Types.ObjectId(req.query.artist) }
       }
-      let albums = await Album.find(filter).populate("artist");
+      let albums = await Album.find(filter).sort({ "year": 1 }).populate("artist");
       res.send(albums);
     } catch (e) {
       console.error(e.message)
@@ -55,6 +56,7 @@ const createRouter = () => {
   });
 
   router.get("/:id", async (req, res) => {
+
     try {
       const album = await Album.findById(req.params.id).populate("artist");
       res.send(album);
