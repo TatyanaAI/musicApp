@@ -1,4 +1,4 @@
-import { GET_TRACKS_REQUEST, GET_TRACKS_SUCCESS, GET_TRACKS_FAILURE, INIT_TRACKS } from "../actionTypes";
+import { GET_TRACKS_REQUEST, GET_TRACKS_SUCCESS, GET_TRACKS_FAILURE } from "../actionTypes";
 import axios from 'axios'
 
 const getTracksRequest = () => {
@@ -25,6 +25,7 @@ export const tracksRequest = (album) => {
                     duration: album[1].duration,
                     number: album[1].number,
                     id: album[1]._id,
+                    video: album[1].video
                 }
             });
             dispatch(getTracksSuccess(tracks));
