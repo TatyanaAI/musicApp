@@ -19,6 +19,9 @@ const TrackSchema = new Schema({
   number: {
     type: String,
     required: true
+  },
+  video: {
+    type: String
   }
 });
 

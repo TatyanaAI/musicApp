@@ -1,44 +1,47 @@
 const express = require("express");
 const router = express.Router();
 const TrackHistory = require("../models/TrackHistory");
-const User = require("../models/User");
 const Track = require("../models/Track");
+const auth = require("../middleware/auth");
 
 
 const createRouter = () => {
-    router.post("/", async (req, res) => {
-        const token = req.get('Authorization');
-
-        if (!token) {
-            return res.status(401).send({ error: 'No token present' });
-        }
-
-        let user = await User.findOne({ token });
-
-        if (!user) {
-            return res.status(401).send({ error: 'Wrong token!' });
-        }
-
+    router.post("/", auth, async (req, res) => {
         try {
-
-            let track = await Track.findById(req.body.track).populate('track');
+            let track = await Track.findById(req.body.track).populate("album");
 
             if (!track) {
                 return res.status(400).send({ error: 'Incorrect track id' });
             }
 
             const history = {
-                user: user,
+                user: req.user,
                 track: track,
-                datetime: new Date().toJSON().slice(0, 10)
+                datetime: new Date().toISOString()
             }
             const historyPoint = new TrackHistory(history);
+
             await historyPoint.save();
             return res.send(historyPoint);
         }
         catch (err) {
             console.log(err);
             res.status(400).send(err);
+        }
+    });
+
+    router.get("/", auth, async (req, res) => {
+        try {
+
+            let trackHistory = await TrackHistory.find({ "user": req.user.id }).sort({ "datetime": -1 }).populate({
+                path: 'track', populate: { path: "album", populate: { path: "artist" } }
+            });
+
+            res.send(trackHistory);
+        }
+        catch (err) {
+            console.error(e.message)
+            res.sendStatus(500).send(e);
         }
     });
 

@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 const Track = require("../models/Track");
 const Album = require("../models/Album");
-const mongoose = require('mongoose');
-
 
 const createRouter = () => {
   router.post("/", async (req, res) => {
@@ -43,6 +42,5 @@ const createRouter = () => {
 
   return router;
 };
-
 
 module.exports = createRouter;
