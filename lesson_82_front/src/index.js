@@ -12,6 +12,8 @@ import axios from 'axios';
 import artistsReducer from './store/reducers/artistsReducer';
 import albumsReducer from "./store/reducers/albumsReducer";
 import tracksReducer from "./store/reducers/tracksReducer";
+import usersReducer from "./store/reducers/usersReducer";
+import trackHistoryReducer from "./store/reducers/trackHistoryReducer";
 
 axios.defaults.baseURL = 'http://localhost:8000';
 const history = createBrowserHistory();
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   artists: artistsReducer,
   albums: albumsReducer,
   tracks: tracksReducer,
+  users: usersReducer,
+ 
   router: connectRouter(history)
 });
 
