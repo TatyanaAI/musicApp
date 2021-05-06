@@ -6,7 +6,7 @@ import TracksList from "../containers/TracksList/tracksList";
 import Registration from "../containers/Registration/registration";
 import Login from "../containers/Login/login";
 import Layout from '../components/UI/Layout/layout';
-
+import TrackHistoryList from '../containers/TrackHistoryList/trackHistoryList';
 import './App.css';
 
 function App(props) {
@@ -21,7 +21,7 @@ function App(props) {
           <Route path="/albums/:id" exact component={props => <TracksList {...props} />} />
           <Route path="/register" exact component={Registration} />
           <Route path="/login" exact component={Login}/>
-       
+          <Route path="/track_history" exact component={TrackHistoryList}/>
           <Route render={() => {
             return <h1>Page not found</h1>;
           }} />

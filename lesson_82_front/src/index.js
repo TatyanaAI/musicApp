@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
   albums: albumsReducer,
   tracks: tracksReducer,
   users: usersReducer,
- 
+  trackHistory: trackHistoryReducer,
   router: connectRouter(history)
 });
 
