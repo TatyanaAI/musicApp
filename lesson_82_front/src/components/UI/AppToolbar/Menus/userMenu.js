@@ -30,6 +30,13 @@ const UserMenu = ({ user, onLogoutClick }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+   
+        <MenuItem component={Link} to="/add_artist" color="inherit">
+          Add Artist</MenuItem>
+        <MenuItem component={Link} to="/add_album" color="inherit">
+          Add Album</MenuItem>
+        <MenuItem component={Link} to="/add_track" color="inherit">
+          Add Track</MenuItem>
         <MenuItem component={Link} to="/track_history" color="inherit">
           Track history</MenuItem>
         <MenuItem onClick={onLogoutClick}>Logout</MenuItem>
