@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Modal, Button } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from "react-redux";
 import dateFormat from 'dateformat';
 import { push } from 'connected-react-router';
@@ -50,6 +50,7 @@ const TracksHistoryList = () => {
 
     const dispatch = useDispatch();
     const { history, loading, error } = useSelector(state => state.trackHistory);
+
     const { user } = useSelector(state => state.users);
 
     const [modal, setModal] = React.useState({
