@@ -25,36 +25,36 @@ const getTracksHistoryFailure = error => {
     return { type: GET_TRACKS_HISTORY_FAILURE, error };
 };
 
-export const setTrack = (token, track) => {
+export const setTrack = (track) => {
     return async dispatch => {
         try {
             dispatch(setTrackInHistoryRequest());
-            await axios.post('/track_history', track, {
-                headers: {
-                    'Authentication': token
-                }
-            });
+            await axios.post('/track_history', track);
             dispatch(setTrackInHistorySuccess());
         }
-        catch (e) {
-            dispatch(setTrackInHistoryFailure(e));
+        catch (error) {
+            if (error.response && error.response.data) {
+                dispatch(setTrackInHistoryFailure(error.response.data.error));
+            } else {
+                dispatch(setTrackInHistoryFailure(error.message));
+            }
         }
     };
 };
 
-export const getTracks = (token) => {
+export const getTracks = () => {
     return async dispatch => {
         try {
             dispatch(getTracksHistoryRequest());
-            const response = await axios.get('/track_history', {
-                headers: {
-                    'Authentication': token
-                }
-            });
+            const response = await axios.get('/track_history');
             dispatch(getTracksHistorySuccess(response.data));
         }
-        catch (e) {
-            dispatch(getTracksHistoryFailure(e));
+        catch (error) {
+            if (error.response && error.response.data) {
+                dispatch(getTracksHistoryFailure(error.response.data.error));
+            } else {
+                dispatch(getTracksHistoryFailure(error.message));
+            }
         }
     };
 };

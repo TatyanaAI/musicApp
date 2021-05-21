@@ -18,10 +18,6 @@ export const loginUserFailure = error => {
   return { type: LOGIN_USER_FAILURE, error };
 };
 
-export const logoutUser = () => {
-  return { type: LOGOUT_USER };
-};
-
 export const registerUser = user => {
   return async dispatch => {
     try {
@@ -29,7 +25,11 @@ export const registerUser = user => {
       dispatch(registerUserSuccess());
       dispatch(push('/'));
     } catch (error) {
-      dispatch(registerUserFailure(error.response.data));
+      if (error.response && error.response.data) {
+        dispatch(registerUserFailure(error.response.data.error));
+      } else {
+        dispatch(registerUserFailure(error.message));
+      }
     }
   };
 };
@@ -45,5 +45,13 @@ export const loginUser = user => {
         dispatch(loginUserFailure(error.response.data));
       }
     );
+  };
+};
+
+export const logoutUser = () => {
+  return async dispatch => {
+    await axios.delete("/users/sessions");
+    dispatch({ type: LOGOUT_USER });
+    dispatch(push("/login"));
   };
 };
