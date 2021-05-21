@@ -30,7 +30,7 @@ const UserMenu = ({ user, onLogoutClick }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-   
+        {user && user.role === "admin" && <MenuItem component={Link} to="/admin" color="inherit"> Admin Panel </MenuItem> }
         <MenuItem component={Link} to="/add_artist" color="inherit">
           Add Artist</MenuItem>
         <MenuItem component={Link} to="/add_album" color="inherit">

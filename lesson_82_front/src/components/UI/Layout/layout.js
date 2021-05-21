@@ -8,9 +8,6 @@ const Layout = (props) => {
       <main className="Layout-Content">
         {props.children}
       </main>
-      <footer className="footer">
-        Copyright 2021
-      </footer>
     </>
   );
 };
