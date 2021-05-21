@@ -16,7 +16,17 @@ const AlbumSchema = new Schema({
     type: String,
     required: true
   },
-  cover: String
+  cover: String,
+  published: {
+    type: Boolean,
+    enum: [true, false],
+    default: false
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 AlbumSchema.plugin(idValidator, {

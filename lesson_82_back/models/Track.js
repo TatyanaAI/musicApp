@@ -17,11 +17,21 @@ const TrackSchema = new Schema({
     required: true
   },
   number: {
-    type: String,
+    type: Number,
     required: true
   },
   video: {
     type: String
+  },
+  published: {
+    type: Boolean,
+    enum: [true, false],
+    default: false
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 
