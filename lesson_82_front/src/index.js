@@ -1,43 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import { createBrowserHistory } from "history";
-import { connectRouter, routerMiddleware, ConnectedRouter } from "connected-react-router";
+import { ConnectedRouter } from "connected-react-router";
 import './index.css';
+import store, {history} from './store/configureStore';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
-import artistsReducer from './store/reducers/artistsReducer';
-import albumsReducer from "./store/reducers/albumsReducer";
-import tracksReducer from "./store/reducers/tracksReducer";
-import usersReducer from "./store/reducers/usersReducer";
-import trackHistoryReducer from "./store/reducers/trackHistoryReducer";
 
 axios.defaults.baseURL = 'http://localhost:8000';
-const history = createBrowserHistory();
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const rootReducer = combineReducers({
-  artists: artistsReducer,
-  albums: albumsReducer,
-  tracks: tracksReducer,
-  users: usersReducer,
-  trackHistory: trackHistoryReducer,
-  router: connectRouter(history)
-});
-
-const middleware = [
-  thunkMiddleware,
-  routerMiddleware(history)
-];
-
-const enhancers = composeEnhancers(applyMiddleware(...middleware));
-
-const store = createStore(rootReducer, enhancers);
-
 
 const app = (
   <Provider store={store}>

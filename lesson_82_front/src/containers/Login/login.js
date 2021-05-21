@@ -80,9 +80,11 @@ const Login = () => {
             <FormElement
               name="username"
               label="Enter username "
+              type="text"
               required={true}
               value={state.username}
               onChange={inputChangeHandler}
+              variant="outlined"
             />
             <FormElement
               name="password"
@@ -91,6 +93,7 @@ const Login = () => {
               required={true}
               value={state.password}
               onChange={inputChangeHandler}
+              variant="outlined"
             />
           </Grid>
           <Button
